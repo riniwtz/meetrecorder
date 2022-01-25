@@ -23,7 +23,7 @@ function gotMessage(message, sender, sendResponse) {
         if (!hasInitialized) {
             initializeButton();
             initializeDownloader();
-            initializeMediaEvents();
+            initializeMediaStream();
             hasInitialized = true;
         }
     }
@@ -83,7 +83,7 @@ function toggle() {
                 button.addEventListener("click", toggle);
 
                 // we can also add event listeners when it changing window
-                initializeMediaEvents();
+                initializeMediaStream();
                 recordMedia();
             }, 500);
             break;
@@ -147,7 +147,7 @@ function downloadMedia(URL) {
 }
 
 // Initialize media recorder action events
-function initializeMediaEvents() {
+function initializeMediaStream() {
     let videoDOM = getVideoDOM();
     if (videoDOM.played.length > 0) { // check if dom exist
         let chunks = [];
@@ -158,6 +158,7 @@ function initializeMediaEvents() {
         }
         mediaRecorder.onstop = (ev) => {
             let blob = new Blob(chunks, { 'type' : 'video/mp4;' });
+            console.log("blob", blob);
             chunks = [];
             let videoURL = window.URL.createObjectURL(blob);
             downloadMedia(videoURL);
