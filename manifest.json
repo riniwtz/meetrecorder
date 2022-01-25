@@ -1,0 +1,23 @@
+{
+    "background": {
+        "scripts": [ "background.js" ]
+    },
+    "manifest_version": 2,
+    "name": "Meet Recorder",
+    "version": "1.0.0",
+    "description": "Record your Google meet share screen with a single click",
+    "icons": {
+        "256": "./images/icon_256px.png",
+        "128": "./images/icon_128px.png"
+    },
+    "browser_action": {
+        "default_icon": "./images/icon_256px.png"
+    },
+    "permissions": [ "*://meet.google.com/*" ],
+    "content_scripts": [
+        {
+            "matches": ["*://meet.google.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
